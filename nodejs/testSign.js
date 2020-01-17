@@ -2,7 +2,9 @@ const { Harmony } = require('@harmony-js/core')
 const { RLPSign } = require('@harmony-js/transaction')
 const { ChainType, ChainID, hexToBN } = require('@harmony-js/utils')
 
-const url = 'http://localhost:9500'
+//const url = 'http://localhost:9500'
+const url = 'https://api.s0.b.hmny.io'
+//const url = 'http:/34.219.69.3:9500'
 
 const harmony = new Harmony(url, {
   chainType: ChainType.Harmony,
@@ -10,7 +12,7 @@ const harmony = new Harmony(url, {
 })
 
 const testAccs = [
-  '27978f895b11d9c737e1ab1623fde722c04b4f9ccb4ab776bf15932cc72d7c66'
+  '01F903CE0C960FF3A9E68E80FF5FFC344358D80CE1C221C3F9711AF07F83A3BD'
 ]
 
 const sender = harmony.wallet.addByPrivateKey(testAccs[0])
@@ -50,8 +52,8 @@ async function main() {
     const signed = await sender.signTransaction(tx, true)
     logOutPut('Signed Transation', signed.txParams)
     logOutPut('rawTransaction', signed.getRawTransaction())
-    const [Transaction, hash] = await signed.sendTransaction()
-    logOutPut('Transaction Hash', hash)
+    //const [Transaction, hash] = await signed.sendTransaction()
+    //logOutPut('Transaction Hash', hash)
     // from here on, we use hmy_getTransactionRecept and hmy_blockNumber Rpc api
     // if backend side is not done yet, please delete them from here
     const confirmed = await Transaction.confirm(hash)
